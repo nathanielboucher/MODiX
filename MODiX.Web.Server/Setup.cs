@@ -24,7 +24,6 @@ namespace Modix.Web.Server
 
         public static IApplicationBuilder UseModixWebServer(this IApplicationBuilder application)
             => application
-                .UseRouting()
                 .UseAuthentication()
                 .UseAuthorization()
                 .UseGrpcWeb(new GrpcWebOptions()

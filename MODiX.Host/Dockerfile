@@ -21,4 +21,5 @@ RUN dotnet publish -c Release --no-build --no-restore -o /app  MODiX.Host/MODiX.
 
 FROM base AS final
 COPY --from=publish /app .
+HEALTHCHECK CMD curl --fail http://localhost:80/health || exit 1
 ENTRYPOINT ["dotnet", "MODiX.Host.dll"]

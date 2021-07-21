@@ -22,5 +22,8 @@ namespace Modix.Data
                 .AddSingleton<ITransactionScopeFactory, TransactionScopeFactory>()
                 .AddPermissions()
                 .AddUsers();
+
+        public static IHealthChecksBuilder AddModixData(this IHealthChecksBuilder builder)
+            => builder.AddDbContextCheck<ModixDbContext>();
     }
 }

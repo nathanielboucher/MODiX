@@ -35,6 +35,8 @@ namespace Modix.Host
                         .Append("application/octet-stream"))
                 .AddSingleton<ISystemClock, DefaultSystemClock>()
                 .AddLogging(_configuration)
+                .Add(services => services.AddHealthChecks()
+                    .AddModixData())
                 .AddModixBot()
                 .AddModixBusiness(_configuration)
                 .AddModixData(_configuration)
@@ -55,6 +57,9 @@ namespace Modix.Host
                 .UseHttpsRedirection()
                 .UseBlazorFrameworkFiles()
                 .UseStaticFiles()
+                .UseRouting()
+                .UseEndpoints(builder => builder
+                    .MapHealthChecks("/health"))
                 .UseModixWebServer()
                 .UseFallbackFile("index.html");
         }
